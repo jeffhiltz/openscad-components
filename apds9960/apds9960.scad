@@ -1,43 +1,68 @@
+$fn = 50;
 
-height = 12.0;
+padding = 2.0;
 
-thickness = 2.0;
-fudge = 0.1;
+wall_thickness = 2.0;
 
-width = 38.5;
-depth = 30.50;
+width = 13.5;
+length = 13.0;
+
+module apds9960() {
+  cutout_depth = 0.5;
+
+  module surrounding() {
+    l = length + padding * 2;
+    w = width + padding * 2;
+    h = wall_thickness;
+    cube([l, w, h]);
+  }
+
+  module recess() {
+    translate([padding, padding, 0]) {
+      cube([length, width, cutout_depth]); 
+    }
+  }
+  
+  module pegs() {
+    radius = 1.4;
+    height = 3.0;
+    translate([padding + radius + 1, padding + radius + 1, -height + cutout_depth]) {
+      cylinder(height, radius * 1.0, radius);
+    }
+    translate([padding + radius + 1, padding + width - radius - 1, -height + cutout_depth]) {
+      cylinder(height, radius * 1.0, radius);
+    }
+  }
  
-cavity_width = width - (2 * thickness);
-cavity_depth = depth - (2 * thickness);
-cavity_height = height - thickness + fudge;
-
-hole_diameter = 7.0;
-
-slit_width = 4.0;
-slit_height = 23.0;
-
-// lid
-difference() {
-    union () {
-        translate([-(width / 2.0), 20, 0.0]) cube([width, depth, 2.0]);
-        translate([-(cavity_width / 2.0), 22, 2.0]) cube([cavity_width, cavity_depth, 1.5]);            
+  module cutout() {
+    l = 4.0;
+    w = 2.5;
+    h = 1.7;
+    radius = h * 4;
+    translate([padding + 1, padding + width / 2 - w/2, 0]) {
+      cube([l, w, wall_thickness]);
+      translate([l/2, w/2, h * 0.75 + radius]) {
+        sphere(radius);
+      }
     }
-    translate([1, 22 + (cavity_depth / 2), 2.5]) cylinder(h = 5 + fudge, r1 = hole_diameter, r2 =hole_diameter, center = true);
-    rotate([0, 0, 90]) translate([21.9, -12.5, 0]) cube([slit_width, slit_height, 10]);
-    rotate([0, 0, 90]) translate([44.6, -12.5, 0]) cube([slit_width, slit_height, 10]);
+  }
+  
+  module pins() {
+    l = 2.5;
+    w = 12.0;
+    h = 1.8;
+    translate([padding + length - l - 1, padding + (width - w) / 2, 0]) {
+      cube([l, w, h]);
+    }
+  }
+  
+  difference() {
+    surrounding();
+    recess();
+    cutout();
+    pins();
+  }
+  pegs();
 }
 
-// base
-union() {
-    translate([13.5, -(cavity_depth / 2.0), 2]) cube([4.0, cavity_depth, 4.0]);
-    translate([-16, -(cavity_depth / 2.0), 2]) cube([4.0, cavity_depth, 2.0]);
-    difference () {
-        translate([0, 0, height / 2.0]) cube([width, depth, height], center = true); 
-        translate([0, 0, (cavity_height / 2.0) + thickness]) cube([cavity_width, cavity_depth, cavity_height], center = true);
-        translate([1, 0, thickness / 2.0]) cylinder(h = thickness + fudge, r1 = hole_diameter, r2 = hole_diameter, center = true);
-        rotate([0, 0, 90]) translate([9, -12.5, 0]) cube([slit_width, slit_height, 5]);
-        rotate([0, 0, 90]) translate([-13, -12.5, 0]) cube([slit_width, slit_height, 5]);
-        translate([-20, -6, 1]) cube([3, 12, 8]);
-        translate([-17.25, 13.0, 4]) cube([7, 3, 4]);        
-    }
-}
+apds9960();
