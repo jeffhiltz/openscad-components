@@ -4,8 +4,8 @@ padding = 2.0;
 
 wall_thickness = 2.0;
 
-width = 13.5;
-length = 13.0;
+width = 13.6; // includes 0.1 fudge
+length = 13.6;
 
 module apds9960() {
   cutout_depth = 0.5;
@@ -34,9 +34,10 @@ module apds9960() {
     }
   }
  
+  // For the optics of the sensor
   module cutout() {
-    l = 4.0;
-    w = 2.5;
+    l = 4.3;
+    w = 2.6;
     h = 1.7;
     radius = h * 4;
     translate([padding + 1, padding + width / 2 - w/2, 0]) {
