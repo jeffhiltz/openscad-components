@@ -4,8 +4,8 @@ padding = 2.0;
 
 wall_thickness = 2.0;
 
-width = 13.6; // includes 0.1 fudge
-length = 13.6;
+width = 15.0; // includes 1.0 fudge
+length = 14.5;
 
 module apds9960() {
   cutout_depth = 0.5;
@@ -26,24 +26,28 @@ module apds9960() {
   module pegs() {
     radius = 1.4;
     height = 3.0;
-    translate([padding + radius + 1, padding + radius + 1, -height + cutout_depth]) {
+    center = padding + width / 2;
+    recessGap = 1.5;
+    distanceFromCenter = 4.4;
+    translate([padding + radius + recessGap, center + distanceFromCenter, -height + cutout_depth]) {
       cylinder(height, radius * 1.0, radius);
     }
-    translate([padding + radius + 1, padding + width - radius - 1, -height + cutout_depth]) {
+    translate([padding + radius + recessGap, center - distanceFromCenter, -height + cutout_depth]) {
       cylinder(height, radius * 1.0, radius);
     }
   }
  
   // For the optics of the sensor
   module cutout() {
-    l = 4.3;
+    l = 4.5;
     w = 2.6;
     h = 1.7;
     radius = h * 4;
-    translate([padding + 1, padding + width / 2 - w/2, 0]) {
+    recessGap = 1.3;
+    translate([padding + recessGap, padding + width / 2 - w/2, 0]) {
       cube([l, w, wall_thickness]);
       translate([l/2, w/2, h * 0.75 + radius]) {
-        sphere(radius);
+        //sphere(radius);
       }
     }
   }
@@ -52,7 +56,8 @@ module apds9960() {
     l = 2.5;
     w = 12.0;
     h = 1.8;
-    translate([padding + length - l - 1, padding + (width - w) / 2, 0]) {
+    recessGap = 1.5;
+    translate([padding + length - l - recessGap, padding + (width - w) / 2, 0]) {
       cube([l, w, h]);
     }
   }
