@@ -4,7 +4,7 @@ padding = 2.0;
 
 wall_thickness = 2.0;
 
-width = 15.0; // includes 1.0 fudge
+width = 14.5;
 length = 14.5;
 
 module apds9960() {
@@ -43,7 +43,7 @@ module apds9960() {
     w = 2.6;
     h = 1.7;
     radius = h * 4;
-    recessGap = 1.3;
+    recessGap = 1.1;
     translate([padding + recessGap, padding + width / 2 - w/2, 0]) {
       cube([l, w, wall_thickness]);
       translate([l/2, w/2, h * 0.75 + radius]) {
@@ -55,7 +55,7 @@ module apds9960() {
   module pins() {
     l = 2.5;
     w = 12.0;
-    h = 1.8;
+    h = 1.9;
     recessGap = 1.5;
     translate([padding + length - l - recessGap, padding + (width - w) / 2, 0]) {
       cube([l, w, h]);
