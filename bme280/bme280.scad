@@ -27,7 +27,7 @@ module bme280() {
     radius = 1.4;
     height = 3.0;
     center = padding + width / 2;
-    recessGap = 1.5;
+    recessGap = 2.5;
     distanceFromCenter = 2.7;
     translate([padding + radius + recessGap, center - distanceFromCenter, -height + cutout_depth]) {
       cylinder(height, radius * 1.0, radius);
@@ -36,12 +36,12 @@ module bme280() {
  
   // For the sensor
   module cutout() {
-    l = 3.0;
-    w = 3.0;
+    l = 2.8;
+    w = 2.8;
     h = 1.7;
     center = padding + width / 2;
-    recessGap = 1.8;
-    distanceFromCenter = 0.7;
+    recessGap = 1.9;
+    distanceFromCenter = 0.8;
     translate([padding + recessGap, center + distanceFromCenter, 0]) {
       cube([l, w, wall_thickness]);
     }
@@ -52,7 +52,7 @@ module bme280() {
     l = 2.5;
     w = 9.6;
     h = 1.9;
-    recessGap = 1.5;
+    recessGap = 1.3;
     translate([padding + length - l - recessGap, padding + (width - w) / 2, 0]) {
       cube([l, w, h]);
     }
