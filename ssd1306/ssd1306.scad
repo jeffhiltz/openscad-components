@@ -5,7 +5,7 @@ padding = 2.0;
 wall_thickness = 2.0;
 
 width = 27.9;
-length = 30.1;
+length = 27.6;
 
 module ssd1306() {
   cutout_depth = 0.5;
@@ -25,21 +25,21 @@ module ssd1306() {
   
   module pegs() {
     radius = 1.4;
-    height = 5.0;
+    height = 4.0;
     
     // top
-    translate([padding + radius + 1.3, padding + radius + 0.9, -height + cutout_depth]) {
+    translate([padding + radius + 1.3, padding + radius + 1.2, -height + cutout_depth]) {
       cylinder(height, radius * 1.0, radius);
     }
-    translate([padding + radius + 1.3, padding + width - radius - 0.9, -height + cutout_depth]) {
+    translate([padding + radius + 1.3, padding + width - radius - 1.2, -height + cutout_depth]) {
       cylinder(height, radius * 1.0, radius);
     }
     
     // bottom
-    translate([padding + length - radius - 0.4, padding + radius + 0.9, -height + cutout_depth]) {
+    translate([padding + length - radius - 0.4, padding + radius + 1.2, -height + cutout_depth]) {
       cylinder(height, radius * 1.0, radius);
     }
-    translate([padding + length - radius - 0.4, padding + width - radius - 0.9, -height + cutout_depth]) {
+    translate([padding + length - radius - 0.4, padding + width - radius - 1.2, -height + cutout_depth]) {
       cylinder(height, radius * 1.0, radius);
     }
     
