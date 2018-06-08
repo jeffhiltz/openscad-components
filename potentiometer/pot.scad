@@ -27,15 +27,39 @@ module pot(length, width, height, notch_angles) {
 }
 
 rows = 1;
-columns = 8;
+columns = 1;
 
-pot_length = 20;
+pot_length = 30;
 pot_width = 25;
 panel_thickness = 3;
 
+
+font = "Futura";
+
+letter_size = 5;
+letter_height = 0.5;
+word = "VOL";
+
+difference() {
+    union(){
 for (i = [0:columns - 1]) {
     for (j = [0:rows - 1]) {
         translate([pot_width * i, pot_length * j, 0])
-            pot(pot_length, pot_width, panel_thickness, [90 + (90 * j)]);
+            pot(pot_length, pot_width, panel_thickness, [45 + (90 * j)]);
     }
+}
+
+
+translate([pot_width / 2, (pot_length - 7.2) / 4, panel_thickness]) {
+    linear_extrude(height = letter_height) {
+        text(word, size = letter_size, font = font, halign = "center", valign = "center", $fn = 16);
+    }
+}
+}
+
+translate([pot_width / 2, pot_length - ((pot_length - 7.2) / 4), panel_thickness - (letter_height)]) {
+    linear_extrude(height = letter_height) {
+        text(word, size = letter_size, font = font, halign = "center", valign = "center", $fn = 16);
+    }
+}
 }
