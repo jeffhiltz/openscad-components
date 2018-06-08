@@ -1,34 +1,40 @@
 $fn = 50;
 
-box_width = 200;
-box_length = 140;
-box_thickness = 4;
+cutout_padding = 0.15;
+
+box_width = 220;
+box_length = 55;
+box_thickness = 3;
 
 // width, length, x_offset, y_offset
 cutouts = [
-  [20, 100, 20, 20],
-  [20, 100, 50, 20],
-  [100, 20, 80, 20],
-  [100, 20, 80, 50],
-  [40, 40, 80, 80],
-  [50, 40, 130, 80],
+  [200, 10, 10, 10],
+  [200, 20, 10, 25],
 ];
 
 
 // a cutout to insert components.
 module cutout(width, length, x_offset, y_offset) {
+  width = width + cutout_padding * 2;
+  length = length + cutout_padding * 2;
+  x_offset = x_offset - cutout_padding;
+  y_offset = y_offset - cutout_padding;
   translate([x_offset, y_offset, 0])
     cube([width, length, box_thickness]);
 }
 
 // a lip to hold component in place.
-module lip(width, length, x_offset, y_offset, lip_width) {
-  translate([x_offset, y_offset, -box_thickness]) {
+module lip(width, length, x_offset, y_offset, lip_width, lip_thickness) {
+  width = width + cutout_padding * 2;
+  length = length + cutout_padding * 2;
+  x_offset = x_offset - cutout_padding;
+  y_offset = y_offset - cutout_padding;
+  translate([x_offset, y_offset, -lip_thickness]) {
     difference() {
       translate([-lip_width, -lip_width, 0])
-        cube([width + lip_width * 2, length + lip_width * 2, box_thickness]);
+        cube([width + lip_width * 2, length + lip_width * 2, lip_thickness]);
       translate([lip_width, lip_width, 0])
-        cube([width - lip_width * 2, length - lip_width * 2, box_thickness]);
+        cube([width - lip_width * 2, length - lip_width * 2, lip_thickness]);
     }
   }
 }
@@ -42,5 +48,5 @@ difference() {
 }
 
 for (c = cutouts) {
-  lip(c[0], c[1], c[2], c[3], 2);
+  lip(c[0], c[1], c[2], c[3], 2, 1.25);
 }
