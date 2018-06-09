@@ -1,4 +1,6 @@
 module surface(box_width, box_length, box_thickness, cutouts) {
+    cutout_padding = 0.15;
+  
     // a cutout to insert components.
     module cutout(width, length, x_offset, y_offset) {
       width = width + cutout_padding * 2;
@@ -37,3 +39,19 @@ module surface(box_width, box_length, box_thickness, cutouts) {
       lip(c[0], c[1], c[2], c[3], 2, 1.25);
     }
 }
+
+// Test the component
+box_width = 180;
+box_length = 120;
+box_thickness = 3;
+
+cutouts = [
+  [20, 100, 10, 10],
+  [20, 100, 40, 10],
+  [100, 20, 70, 10],
+  [100, 20, 70, 40],
+  [40, 40, 70, 70],
+  [50, 40, 120, 70],
+];
+
+surface(box_width, box_length, box_thickness, cutouts);
