@@ -52,7 +52,7 @@ module headers(width, length, height, width_pin_count, length_pin_count) {
   }
 }
 
-// Test the module
+// Test the component
 headers_length = 20;
 headers_width = 25;
 panel_thickness = 3;
