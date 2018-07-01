@@ -1,29 +1,37 @@
 $fn = 50;
 
-module led(length, width, height) {
+/**
+ * A component to hold a 3mm LED.
+ *
+ * @param width        width of the component surface (x-axis)
+ * @param length       length of the component surface (y-axis)
+ * @param height       height of the component surface (z-axis)
+ */
+module led(width, length, height) {
+  translate([width / 2, length / 2, height / 2]) {
     difference() {
-        hole_radius = 2.5;
-        
-        // surface
-        cube([width, length, height], true);
-        
-        // hole
-        cylinder(h = 7, r = hole_radius, center = true);
+      hole_radius = 2.5;
+      
+      // surface
+      cube([width, length, height], true);
+      
+      // hole
+      cylinder(h = 7, r = hole_radius, center = true);
     }
+  }
 }
 
+// Test the component
 rows = 1;
-columns = 1;
+columns = 2;
 
-led_length = 20;
-led_width = 20;
+component_length = 20;
+component_width = 20;
 panel_thickness = 3;
 
-translate([led_width / 2, led_length / 2, 0]) {
-    for (i = [0:columns - 1]) {
-        for (j = [0:rows - 1]) {
-            translate([led_width * i, led_length * j, 0])
-                led(led_length, led_width, panel_thickness, [90 + (90 * j)]);
-        }
-    }
+for (i = [0:columns - 1]) {
+  for (j = [0:rows - 1]) {
+    translate([component_width * i, component_length * j, 0])
+      led(component_width, component_length, panel_thickness);
+  }
 }
