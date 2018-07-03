@@ -12,21 +12,22 @@ $fn = 50;
     difference() {
       hole_radius = 3.0;
       sleve_height = 4.5;
-      
+      recess_height = 1.7;
+
       union() {
         // surface
         cube([width, length, height], true);
         // sleve
         translate([0, 0, (sleve_height - height) / -2])
-          cylinder(h = sleve_height, r = 4, center = true);
+          cylinder(h = sleve_height, r = 5, center = true);
       }
-    
+
       // hole
       cylinder(h = 7, r = hole_radius, center = true);
-      
+
       // recess
-      translate([0, 0, (height / 2) - 0.3])
-        cylinder(h = 0.6, r = 4, center = true);
+      translate([0, 0, (height - recess_height) / 2])
+        cylinder(h = recess_height, r = 4, center = true);
     }
   }
 }
