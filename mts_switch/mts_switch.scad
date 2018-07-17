@@ -1,4 +1,4 @@
-$fn = 50;
+$fn = 64;
 
 /**
  * A component to hold a MTS switch.  (eg: MTS-103)
@@ -21,11 +21,10 @@ module mts(width, length, height) {
         translate([0, 0, (sleve_height - height) / -2])
           cylinder(h = sleve_height, r = sleve_radius, center = true);
         // tab
-        tab_width = 5.0;
-        tab_length = 2.0;
-        tab_height = sleve_height + 1.0;
-        tab_offset = 0.5;
-        translate([(tab_width / 2) - tab_offset, 6.0 + (tab_length / 2), (tab_height - height) / -2])
+        tab_width = sleve_radius * 1.1;
+        tab_length = (length / 2) - 3.5;
+        tab_height = sleve_height;
+        translate([sleve_radius - (tab_width / 2), (tab_length / 2), (tab_height - height) / -2])
           cube([tab_width, tab_length, tab_height], center = true);
       }
 
@@ -39,8 +38,8 @@ module mts(width, length, height) {
 rows = 1;
 columns = 1;
 
-component_length = 20;
-component_width = 20;
+component_length = 25;
+component_width = 25;
 panel_thickness = 3;
 
 for (i = [0:columns - 1]) {
