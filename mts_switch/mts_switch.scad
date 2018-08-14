@@ -6,8 +6,9 @@ $fn = 64;
  * @param width        width of the component surface (x-axis)
  * @param length       length of the component surface (y-axis)
  * @param height       height of the component surface (z-axis)
+ * @param tab_angle    orientation for alignment tab in degrees
  */
-module mts(width, length, height) {
+module mts(width, length, height, tab_angle = 0) {
   translate([width / 2, length / 2, height / 2]) {
     difference() {
       hole_radius = 3.0;
@@ -21,11 +22,12 @@ module mts(width, length, height) {
         translate([0, 0, (sleve_height - height) / -2])
           cylinder(h = sleve_height, r = sleve_radius, center = true);
         // tab
-        tab_width = sleve_radius * 1.1;
+        tab_width = 8.0;
         tab_length = (length / 2) - 3.5;
         tab_height = sleve_height;
-        translate([sleve_radius - (tab_width / 2), (tab_length / 2), (tab_height - height) / -2])
-          cube([tab_width, tab_length, tab_height], center = true);
+        rotate(tab_angle)
+          translate([sleve_radius - (tab_width / 2), (tab_length / 2), (tab_height - height) / -2])
+            cube([tab_width, tab_length, tab_height], center = true);
       }
 
       // hole
