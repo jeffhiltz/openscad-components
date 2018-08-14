@@ -9,7 +9,7 @@
                        values: cutout_width, cutout_length, x_offset, y_offset
  */
  module surface(width, length, height, cutouts) {
-  cutout_padding = 0.15;
+  cutout_padding = 0.05;
 
   // a cutout to insert components.
   module cutout(cutout_width, cutout_length, x_offset, y_offset) {
