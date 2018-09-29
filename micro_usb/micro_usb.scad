@@ -14,7 +14,7 @@ module micro_usb(width, length, height, surround = true) {
     peg_radius = 1.45;
 
     recess_width = 13.3;
-    recess_length = 3.0;
+    recess_length = 2.98;
     recess_height = 1.0;
 
     surround_height = 3.0;
@@ -35,16 +35,16 @@ module micro_usb(width, length, height, surround = true) {
         if (surround) {
           translate([(13.3 + (surround_width * 2)) / -2, (-length / 2), 0]) {
             difference() {
-              cube([13.3 + (surround_width * 2), 15.6 + (surround_width * 2), surround_height]);
+              cube([13.3 + (surround_width * 2), 15.6 + surround_width, surround_height]);
               translate([surround_width, 0, 0])
-                cube([13.3, 15.6 + surround_width, surround_height]);
+                cube([13.3, 15.6, surround_height]);
             }
           }
         }
       }
       
       // recess
-      translate([-recess_width / 2, (-length / 2) + 14.11, (height / 2) - recess_height])
+      translate([-recess_width / 2, (-length / 2) + 14.11 - (recess_length / 2), (height / 2) - recess_height])
         cube([recess_width, recess_length, 1]);
     }
   }
