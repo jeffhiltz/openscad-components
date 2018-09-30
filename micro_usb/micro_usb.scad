@@ -46,7 +46,7 @@ module micro_usb(height) {
       }
       
       // recess
-      translate([-recess_width / 2, (-length / 2) + (breakout_length - (recess_length / 2)) - (recess_length / 2), (height / 2) - recess_height])
+      translate([-recess_width / 2, (-length / 2) + breakout_length - recess_length, (height / 2) - recess_height])
         cube([recess_width, recess_length, recess_height]);
     }
   }
