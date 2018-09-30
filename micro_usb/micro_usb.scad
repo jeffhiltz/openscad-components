@@ -9,8 +9,9 @@ module micro_usb(height) {
   peg_height = 4.0;
   peg_radius = 1.45;
 
-  breakout_width = 13.3;
-  breakout_length = 15.6;
+  breakout_padding = 0.1;
+  breakout_width = 13.3 + (breakout_padding * 2);
+  breakout_length = 15.6 + breakout_padding;
 
   recess_width = breakout_width;
   recess_length = 2.98;
