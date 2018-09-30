@@ -15,7 +15,7 @@ module micro_usb(width, length, height, surround = true) {
 
     recess_width = 13.3;
     recess_length = 2.98;
-    recess_height = 1.0;
+    recess_height = 2.0;
 
     surround_height = 3.0;
     surround_width = 2.0;
@@ -45,7 +45,7 @@ module micro_usb(width, length, height, surround = true) {
       
       // recess
       translate([-recess_width / 2, (-length / 2) + 14.11 - (recess_length / 2), (height / 2) - recess_height])
-        cube([recess_width, recess_length, 1]);
+        cube([recess_width, recess_length, recess_height]);
     }
   }
 }
@@ -54,9 +54,9 @@ module micro_usb(width, length, height, surround = true) {
 rows = 1;
 columns = 1;
 
-component_length = 20;
-component_width = 20;
-panel_thickness = 3;
+component_length = 17.6;
+component_width = 17.3;
+panel_thickness = 2.0;
 
 for (i = [0:columns - 1]) {
   for (j = [0:rows - 1]) {
