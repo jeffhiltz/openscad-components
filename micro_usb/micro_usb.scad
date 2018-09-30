@@ -3,7 +3,7 @@ $fn = 64;
 /**
  * A component to hold a micro USB breakout.
  *
- * @param height       height of the component surface (z-axis)
+ * @param height       height of the base of the component (z-axis)
  */
 module micro_usb(height) {
   peg_height = 4.0;
